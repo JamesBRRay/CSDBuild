@@ -4,9 +4,15 @@ Scripts to create NetworkManager profile for connecting to OpenConnect VPNs
 You'll need to get the AnyConnect PreDeploy tarball from your organisation. For UCL students/staff that is available here: 
 https://www.ucl.ac.uk/isd/how-to/remote-working/connecting-vpn-linux
 
-This is only tested on 16.10 with 4.3.02039-k9 version so far.
-
+## How to ...
 Get the CSDBuild.sh script and run - it downloads the tarball from a URL provided
+
+## Tested on...
+### Distro Version
+* Ubuntu 16.10
+* Ubuntu 16.04
+### AnyConnect Version
+* 4.3.02039-k9
 
 ## Pre-requisuites
 * network-manager-openconnect
