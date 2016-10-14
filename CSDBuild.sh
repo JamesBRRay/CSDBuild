@@ -54,12 +54,19 @@ if [ -z "${PREREQS}" ] && [ -z ${DISTFORCE} ]; then
 fi
 
 # Check each pre-req
+MISSINGREQ=()
 for prereq in ${PREREQS}; do
 	if [ ${DISTRO} == "Ubuntu" ]; then
-		(NULL=$(dpkg -s ${prereq} 2>&1>/dev/null)) || (echo "Pre-req missing... install ${prereq}"; sudo apt-get install ${prereq} )
+		(NULL=$(dpkg -s ${prereq} 2>&1>/dev/null)) || MISSINGREQ+=(${prereq})
 	fi
 done
 
+echo ${MISSINGREQ}
+
+if [ ${DISTRO} == "Ubuntu" ]; then
+	set -x
+	sudo apt-get install ${MISSINGREQ[*]}
+fi
 
 # Download the tarball
 TARBALL=$(mktemp)
