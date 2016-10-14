@@ -9,11 +9,12 @@ This is only tested on 16.10 with 4.3.02039-k9 version so far.
 Get the CSDBuild.sh script and run - it downloads the tarball from a URL provided
 
 ## Pre-requisuites
-network-manager-openconnect
-network-manager-openconnect-gnome
-openconnect
-curl
+* network-manager-openconnect
+* network-manager-openconnect-gnome
+* openconnect
+* curl
 
+## Example run
 ```
 $ ./CSDBuild.sh
 Where would you like the CSD Wrapper and associated code to end up
