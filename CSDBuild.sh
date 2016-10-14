@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 # Where to install to, by default $HOME/CSDWrapper
 read -p "Where would you like the CSD Wrapper and associated code to end up
@@ -48,7 +48,7 @@ if [ ${DISTRO} == "Ubuntu" ]; then
 fi
 
 # No prereqs and no distforce, die
-if [ -z ${PREREQS} -a ${DISTFORCE} -ne 1 ]; then
+if [ -z "${PREREQS}" ] && [ -z ${DISTFORCE} ]; then
 	echo "Unsupported version and DISTFORCE=1 not set... bailing out";
 	exit 1
 fi
@@ -56,9 +56,9 @@ fi
 # Check each pre-req
 for prereq in ${PREREQS}; do
 	if [ ${DISTRO} == "Ubuntu" ]; then
-		dpkg -l ${prereq} || sudo apt-get install ${prereq}
+		dpkg -s ${prereq} 2>&1>/dev/null|| sudo apt-get install ${prereq}
 	fi
-fi
+done
 
 
 # Download the tarball
