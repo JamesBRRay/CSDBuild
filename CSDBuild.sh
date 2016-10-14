@@ -61,9 +61,7 @@ for prereq in ${PREREQS}; do
 	fi
 done
 
-echo ${MISSINGREQ}
-
-if [ ${DISTRO} == "Ubuntu" ]; then
+if [ ${DISTRO} == "Ubuntu" ] && [ ! -z ${MISSINGREQ} ]; then
 	sudo apt-get install ${MISSINGREQ[*]}
 fi
 
