@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 # Where to install to, by default $HOME/CSDWrapper
-read -p "Where would you like the CSD Wrapper and associated code to end up
+read -t 60 -p "Where would you like the CSD Wrapper and associated code to end up
 [default: $HOME/CSDWrapper]: " INSTLOC
 if [ -z ${INSTLOC} ]; then
 	INSTLOC=${HOME}/CSDWrapper
@@ -15,13 +15,13 @@ else
 	mkdir ${INSTLOC}/lib
 fi
 
-read -p "Name of the VPN Connection to create in NetworkManager
+read -t 60 -p "Name of the VPN Connection to create in NetworkManager
 [default: UCLVPN]: " VPNNAME
 if [ -z ${VPNNAME} ]; then
 	VPNNAME=UCLVPN
 fi
 
-read -p "URL to predeploy tarball
+read -t 60 -p "URL to predeploy tarball
 [default: https://www.ucl.ac.uk/isd/how-to/remote-working/resources/linux/anyconnect-predeploy-linux-64-4.3.02039-k9.tar] " PREDEPLOY
 
 if [ -z ${PREDEPLOY} ]; then
