@@ -64,7 +64,6 @@ done
 echo ${MISSINGREQ}
 
 if [ ${DISTRO} == "Ubuntu" ]; then
-	set -x
 	sudo apt-get install ${MISSINGREQ[*]}
 fi
 
