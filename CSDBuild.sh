@@ -37,6 +37,34 @@ if [ ${CONFREE} -eq 0 ]; then
 	exit 2
 fi
 
+# Check the pre-reqs
+DISTRO=$(lsb_release -i -s)
+REL=$(lsb_release -r -s)
+if [ ${DISTRO} == "Ubuntu" ]; then
+	# It's an Ubuntu of sorts
+	if [ ${REL} == "16.04" ] || [ ${REL} == "16.10" ]; then
+		PREREQS="openconnect network-manager-openconnect network-manager-openconnect-gnome curl"
+	fi
+fi
+
+# No prereqs and no distforce, die
+if [ -z "${PREREQS}" ] && [ -z ${DISTFORCE} ]; then
+	echo "Unsupported version and DISTFORCE=1 not set... bailing out";
+	exit 1
+fi
+
+# Check each pre-req
+MISSINGREQ=()
+for prereq in ${PREREQS}; do
+	if [ ${DISTRO} == "Ubuntu" ]; then
+		(NULL=$(dpkg -s ${prereq} 2>&1>/dev/null)) || MISSINGREQ+=(${prereq})
+	fi
+done
+
+if [ ${DISTRO} == "Ubuntu" ] && [ ! -z ${MISSINGREQ} ]; then
+	sudo apt-get install ${MISSINGREQ[*]}
+fi
+
 # Download the tarball
 TARBALL=$(mktemp)
 curl -o ${TARBALL} ${PREDEPLOY}
