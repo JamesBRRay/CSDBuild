@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
 # Where to install to, by default $HOME/CSDWrapper
 read -p "Where would you like the CSD Wrapper and associated code to end up
@@ -56,7 +56,7 @@ fi
 # Check each pre-req
 for prereq in ${PREREQS}; do
 	if [ ${DISTRO} == "Ubuntu" ]; then
-		dpkg -s ${prereq} 2>&1>/dev/null|| sudo apt-get install ${prereq}
+		(NULL=$(dpkg -s ${prereq} 2>&1>/dev/null)) || (echo "Pre-req missing... install ${prereq}"; sudo apt-get install ${prereq} )
 	fi
 done
 
