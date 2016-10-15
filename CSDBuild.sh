@@ -43,7 +43,7 @@ REL=$(lsb_release -r -s)
 if [ ${DISTRO} == "Ubuntu" ]; then
 	# It's an Ubuntu of sorts
 	if [ ${REL} == "16.04" ] || [ ${REL} == "16.10" ]; then
-		PREREQS="openconnect network-manager-openconnect network-manager-openconnect-gnome curl"
+		PREREQS="openconnect network-manager network-manager-openconnect network-manager-openconnect-gnome curl"
 	fi
 fi
 
